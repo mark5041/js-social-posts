@@ -111,8 +111,20 @@ for(let i = 0; i < PostCardFooter.length; i++)
     button.addEventListener("click", 
         function()
         {
-            let numLikes = parseInt(likeBox.innerHTML)
-            console.log(numLikes);
+            let numLikes = parseInt(likeBox.innerHTML);
+            if(this.classList.contains("like-button--liked"))
+            {
+                this.classList.remove('like-button--liked');
+                numLikes --;
+                event.preventDefault();
+            }
+            else
+            {
+                this.classList.add('like-button--liked');
+                numLikes ++;
+                event.preventDefault();
+            }
+            likeBox.innerHTML = numLikes;
         }
     )
 }
