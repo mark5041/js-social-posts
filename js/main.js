@@ -4,7 +4,7 @@ const MainInfoObj = [
         UserSurname: 'Beloso',
         photo: 'https://unsplash.it/300/300?image=' + random(1, 150),
         date: '12-10-2021',
-        text: 'pippo',
+        text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias',
         image: 'https://unsplash.it/300/300?image=' + random(1, 150),
         likes : random(1, 150),
     },
@@ -13,7 +13,7 @@ const MainInfoObj = [
         UserSurname: 'Beloso',
         photo: '',
         date: '12-10-2021',
-        text: 'pippo',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nam magnam nesciunt quaerat repellat tempora, libero id dignissimos ullam ad, ipsum ab iusto deleniti voluptates reprehenderit facilis quod vel amet!',
         image: 'https://unsplash.it/300/300?image=' + random(1, 150),
         likes : random(1, 150),
     },
@@ -22,7 +22,7 @@ const MainInfoObj = [
         UserSurname: 'Beloso',
         photo: '',
         date: '12-10-2021',
-        text: 'pippo',
+        text: 'Vitae nam magnam nesciunt quaerat repellat tempora, libero id dignissimos ullam ad, ipsum ab iusto deleniti voluptates reprehenderit facilis quod vel amet!',
         image: 'https://unsplash.it/300/300?image=' + random(1, 150),
         likes : random(1, 150),
     }
@@ -65,7 +65,7 @@ function generatePostCard(array, box)
         let Objdate = StringConvertionIntoDate(ObjElement.date);
 
         let card = `
-            <div class="post">
+            <div class="post number${i + 1}">
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
@@ -77,20 +77,20 @@ function generatePostCard(array, box)
                         </div>                    
                     </div>
                 </div>
-                <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
+                <div class="post__text">${ObjElement.text}</div>
                 <div class="post__image">
                     <img src="${ObjElement.image}" alt="">
                 </div>
                 <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" href="#" data-postid="${i + 1}">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
                         </div>
                         <div class="likes__counter">
-                            Piace a <b id="like-counter-1" class="js-likes-counter">${ObjElement.likes}</b> persone
+                            Piace a <b id="like-counter-${i + 1}" class="js-likes-counter">${ObjElement.likes}</b> persone
                         </div>
                     </div> 
                 </div>            
@@ -102,3 +102,17 @@ function generatePostCard(array, box)
 
 generatePostCard(MainInfoObj, container);
 
+const PostCardFooter = document.querySelectorAll(".post__footer");
+
+for(let i = 0; i < PostCardFooter.length; i++)
+{
+    let button = PostCardFooter[i].querySelector(".like-button");
+    let likeBox = PostCardFooter[i].querySelector(".js-likes-counter");
+    button.addEventListener("click", 
+        function()
+        {
+            let numLikes = parseInt(likeBox.innerHTML)
+            console.log(numLikes);
+        }
+    )
+}
