@@ -2,11 +2,11 @@ const MainInfoObj = [
     {
         UserName: 'Mark',
         UserSurname: 'Beloso',
-        photo: '',
+        photo: 'https://unsplash.it/300/300?image=' + random(1, 150),
         date: '12-10-2021',
         text: 'pippo',
-        image: 'https://unsplash.it/300/300?image=',
-        likes : 140,
+        image: 'https://unsplash.it/300/300?image=' + random(1, 150),
+        likes : random(1, 150),
     },
     {
         UserName: 'Mark',
@@ -14,8 +14,8 @@ const MainInfoObj = [
         photo: '',
         date: '12-10-2021',
         text: 'pippo',
-        image: 'https://unsplash.it/300/300?image=',
-        likes : 80,
+        image: 'https://unsplash.it/300/300?image=' + random(1, 150),
+        likes : random(1, 150),
     },
     {
         UserName: 'Mark',
@@ -23,8 +23,8 @@ const MainInfoObj = [
         photo: '',
         date: '12-10-2021',
         text: 'pippo',
-        image: 'https://unsplash.it/300/300?image=',
-        likes : 120,
+        image: 'https://unsplash.it/300/300?image=' + random(1, 150),
+        likes : random(1, 150),
     }
 ];
 
@@ -36,11 +36,13 @@ function StringConvertionIntoDate(string)
     const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     const mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(d);
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-
-    console.log(`${da}-${mo}-${ye}`)
+    return `${da}-${mo}-${ye}`;
 }
 
-console.log(StringConvertionIntoDate("11/25/2021"));
+function random(min, max)
+{
+    return Math.floor(Math.random() * max) + min;
+}
 
 function generatePostCard(array, box)
 {
@@ -60,7 +62,7 @@ function generatePostCard(array, box)
             ObjProfileClass = `<img class="profile-pic" src="${ObjElement.photo}" alt="Phil Mangione"> `;
         }
 
-
+        let Objdate = StringConvertionIntoDate(ObjElement.date);
 
         let card = `
             <div class="post">
@@ -71,7 +73,7 @@ function generatePostCard(array, box)
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">${ObjElement.UserName} ${ObjElement.UserSurname}</div>
-                            <div class="post-meta__time">${ObjElement.date}</div>
+                            <div class="post-meta__time">${Objdate}</div>
                         </div>                    
                     </div>
                 </div>
@@ -99,3 +101,4 @@ function generatePostCard(array, box)
 }
 
 generatePostCard(MainInfoObj, container);
+
