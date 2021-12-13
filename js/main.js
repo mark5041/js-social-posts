@@ -32,11 +32,10 @@ const container = document.getElementById("container");
 
 function StringConvertionIntoDate(string)
 {
-    const d = new Date(string);
-    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    const mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(d);
-    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    return `${da}-${mo}-${ye}`;
+    const elements = string.split('-');
+    console.log(elements);
+    let dateNew = elements[1] + "-" + elements[0] + '-' + elements[2];
+    return dateNew;
 }
 
 function random(min, max)
